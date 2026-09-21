@@ -1,24 +1,59 @@
-# README
+# Лабораторная работа №1
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Приложение на Ruby on Rails с несколькими текстовыми страницами и проверкой работоспособности (health check).
 
-Things you may want to cover:
+## Описание
 
-* Ruby version
+Минимальное Rails-приложение без базы данных и представлений (views) — ответы отдаются
+напрямую из контроллера через `render html:`. Приложение демонстрирует базовую маршрутизацию
+Rails и поддержку не-ASCII (UTF-8) текста.
 
-* System dependencies
+## Структура проекта
 
-* Configuration
+Ниже — файлы и каталоги, значимые именно для этой лабораторной работы (остальное — стандартный
+скелет, сгенерированный `rails new`):
 
-* Database creation
+```
+hello_app/
+├── app/
+│   └── controllers/
+│       └── application_controller.rb   # экшены hello и goodbye
+├── config/
+│   └── routes.rb                       # маршруты приложения
+├── bin/
+│   ├── rails                           # запуск rails-команд
+│   └── dev                             # запуск dev-сервера
+├── Gemfile                             # зависимости (Rails 8.1, Puma, SQLite и др.)
+└── README.md
+```
 
-* Database initialization
+## Маршруты
 
-* How to run the test suite
+| Метод | Путь       | Экшен                       | Ответ                  |
+|-------|------------|------------------------------|-------------------------|
+| GET   | `/`        | `application#hello`          | `¡Hola, mundo!`         |
+| GET   | `/goodbye` | `application#goodbye`        | `goodbye, world!`       |
+| GET   | `/up`      | `rails/health#show`          | 200, если приложение живо (health check), иначе 500 |
 
-* Services (job queues, cache servers, search engines, etc.)
+Маршруты определены в [`config/routes.rb`](config/routes.rb), логика экшенов — в
+[`app/controllers/application_controller.rb`](app/controllers/application_controller.rb).
 
-* Deployment instructions
+## Требования
 
-* ...
+* Ruby 3.4.10 (см. [`.ruby-version`](.ruby-version))
+* Bundler
+
+## Запуск
+
+```bash
+bundle install
+bin/rails server
+```
+
+Приложение будет доступно на [http://localhost:3000](http://localhost:3000).
+
+Проверка работоспособности: [http://localhost:3000/up](http://localhost:3000/up).
+
+## Автор
+
+Святослав
